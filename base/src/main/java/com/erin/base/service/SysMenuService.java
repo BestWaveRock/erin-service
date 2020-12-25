@@ -3,7 +3,7 @@ package com.erin.base.service;
 import com.erin.base.domain.SysMenu;
 import com.erin.base.mapper.SysMenuMapper;
 
-import org.springframework.stereotype.Service;
+import org.apache.dubbo.config.annotation.DubboService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 /**
  * <p>
@@ -13,7 +13,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
  * @author ljx
  * @since 2020-12-25
  */
-@Service
+@DubboService
 public class SysMenuService extends ServiceImpl<SysMenuMapper, SysMenu>{
 
 }

@@ -1,5 +1,6 @@
 package com.erin.base.controller;
 
+import org.apache.dubbo.config.annotation.DubboReference;
 import utils.ResultUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +29,7 @@ import io.swagger.annotations.ApiOperation;
 @Api(value = "用户角色关联表接口", description = "用户角色关联表接口")
 public class SysUserRoleController {
 
-	@Autowired
+	@DubboReference
 	SysUserRoleService sysuserroleService;
 
 	@GetMapping(value = "/{id}")

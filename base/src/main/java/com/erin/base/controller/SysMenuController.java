@@ -1,6 +1,6 @@
 package com.erin.base.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,7 +27,7 @@ import utils.ResultUtils;
 @Api(value = "权限表接口", description = "权限表接口")
 public class SysMenuController {
 
-	@Autowired
+	@DubboReference
 	SysMenuService sysmenuService;
 
 	@GetMapping(value = "/{id}")

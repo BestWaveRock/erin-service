@@ -1,5 +1,6 @@
 package com.erin.base.controller;
 
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -27,7 +28,7 @@ import utils.ResultUtils;
 @Api(value = "权限菜单关联表接口", description = "权限菜单关联表接口")
 public class SysPermissionMenuController {
 
-	@Autowired
+	@DubboReference
 	SysPermissionMenuService syspermissionmenuService;
 
 	@GetMapping(value = "/{id}")

@@ -2,7 +2,8 @@ package com.erin.base.api.impl;
 
 
 import com.erin.base.api.SysPermissionMenuApi;
-import org.apache.dubbo.config.annotation.Service;
+import org.apache.dubbo.config.annotation.DubboService;
+
 /**
  * <p>
  * 权限菜单关联表 服务实现类
@@ -11,7 +12,7 @@ import org.apache.dubbo.config.annotation.Service;
  * @author ljx
  * @since 2020-12-25
  */
-@Service(interfaceClass = SysPermissionMenuApi.class)
+@DubboService(interfaceClass = SysPermissionMenuApi.class)
 public class SysPermissionMenuApiImpl implements SysPermissionMenuApi {
 
 }

@@ -2,6 +2,7 @@ package com.erin.base;
 
 import com.erin.base.domain.SysUser;
 import com.zaxxer.hikari.HikariDataSource;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ import java.sql.Statement;
 @RunWith(SpringRunner.class)
 public class JdbcSimpleDatasourceApplicationTests {
 
-    @Autowired
+    @DubboReference
     private DataSource dataSource;
 
     @Test
