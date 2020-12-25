@@ -8,6 +8,8 @@ class BaseApplicationTests {
 
     @Test
     void contextLoads() {
+        JdbcSimpleDatasourceApplicationTests jdbcSimpleDatasourceApplicationTests = new JdbcSimpleDatasourceApplicationTests();
+        jdbcSimpleDatasourceApplicationTests.springDataSourceTest();
     }
 
 }

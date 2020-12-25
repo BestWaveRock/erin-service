@@ -1,6 +1,6 @@
 package com.erin.base.controller;
 
-import com.mayi.core.util.ResultUtils;
+import utils.ResultUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-import com.mayi.core.base.AbstractController;
+
 
 /**
  * <p>
@@ -26,7 +26,7 @@ import com.mayi.core.base.AbstractController;
 @RestController
 @RequestMapping("/sysUserRole")
 @Api(value = "用户角色关联表接口", description = "用户角色关联表接口")
-public class SysUserRoleController extends AbstractController {
+public class SysUserRoleController {
 
 	@Autowired
 	SysUserRoleService sysuserroleService;
