@@ -1,10 +1,18 @@
+
 spring:
+  profiles:
+    active: local
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/merry_christmas?serverTimezone=UTC
     username: root
     password: root12345
 
+logging:
+  file:
+    path: "C:/coder/log/log_info"
+  level:
+    root: info
 ---
 
 spring:
@@ -15,6 +23,11 @@ spring:
     url: jdbc:mysql://192.168.0.102:3306/merry_christmas?serverTimezone=UTC
     username: root
     password: root12345
+logging:
+  file:
+    path: "C:/coder/log/log_local"
+  level:
+    root: info
 
 ---
 

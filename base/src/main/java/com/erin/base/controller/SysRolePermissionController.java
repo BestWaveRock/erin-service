@@ -2,6 +2,7 @@ package com.erin.base.controller;
 
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import utils.ResultUtils;
+
+import javax.annotation.Resource;
 
 
 /**
@@ -28,7 +31,7 @@ import utils.ResultUtils;
 @Api(value = "角色权限关联表接口", description = "角色权限关联表接口")
 public class SysRolePermissionController {
 
-	@DubboReference
+	@Autowired
 	SysRolePermissionService sysrolepermissionService;
 
 	@GetMapping(value = "/{id}")

@@ -4,6 +4,7 @@ import com.erin.base.domain.SysRolePermission;
 import com.erin.base.mapper.SysRolePermissionMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.apache.dubbo.config.annotation.DubboService;
+import org.springframework.stereotype.Service;
 
 /**
  * <p>
@@ -13,7 +14,7 @@ import org.apache.dubbo.config.annotation.DubboService;
  * @author ljx
  * @since 2020-12-25
  */
-@DubboService
+@Service
 public class SysRolePermissionService extends ServiceImpl<SysRolePermissionMapper, SysRolePermission>{
 
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+import javax.annotation.Resource;
 
 
 /**
@@ -29,7 +30,7 @@ import io.swagger.annotations.ApiOperation;
 @Api(value = "用户角色关联表接口", description = "用户角色关联表接口")
 public class SysUserRoleController {
 
-	@DubboReference
+	@Autowired
 	SysUserRoleService sysuserroleService;
 
 	@GetMapping(value = "/{id}")

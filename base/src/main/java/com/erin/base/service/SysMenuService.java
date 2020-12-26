@@ -5,6 +5,8 @@ import com.erin.base.mapper.SysMenuMapper;
 
 import org.apache.dubbo.config.annotation.DubboService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.stereotype.Service;
+
 /**
  * <p>
  * 权限表 服务实现类
@@ -13,7 +15,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
  * @author ljx
  * @since 2020-12-25
  */
-@DubboService
+@Service
 public class SysMenuService extends ServiceImpl<SysMenuMapper, SysMenu>{
 
 }

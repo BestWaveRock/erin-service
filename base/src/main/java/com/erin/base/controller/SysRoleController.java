@@ -14,6 +14,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import utils.ResultUtils;
 
+import javax.annotation.Resource;
+
 
 /**
  * <p>
@@ -28,7 +30,7 @@ import utils.ResultUtils;
 @Api(value = "角色表接口", description = "角色表接口")
 public class SysRoleController {
 
-	@DubboReference
+	@Autowired
 	SysRoleService sysroleService;
 
 	@GetMapping(value = "/{id}")
