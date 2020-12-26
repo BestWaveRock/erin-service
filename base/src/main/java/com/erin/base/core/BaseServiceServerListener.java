@@ -1,6 +1,7 @@
 package com.erin.base.core;
 
 import com.erin.base.service.SysUserService;
+import org.apache.dubbo.common.utils.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +25,6 @@ import org.springframework.stereotype.Component;
 public class BaseServiceServerListener implements ApplicationListener {
     private static Logger log = LoggerFactory.getLogger(BaseServiceServerListener.class);
 
-    @Value("${spring.profiles.active}")
-    private static String profilesActive;
-
     @Override
     public void onApplicationEvent(ApplicationEvent event) {
         if (event instanceof ApplicationEnvironmentPreparedEvent) { // 初始化环境变量
@@ -38,7 +36,7 @@ public class BaseServiceServerListener implements ApplicationListener {
         } else if (event instanceof ApplicationReadyEvent) {// 应用已启动完成
             log.info("=================================");
             log.info("系统[{}]启动完成!!!", "baseService");
-            log.info("启动环境：{}", profilesActive);
+            log.info("启动环境：{}", ((ApplicationReadyEvent) event).getApplicationContext().getEnvironment().getActiveProfiles());
             log.info("=================================");
 
         } else if (event instanceof ContextStartedEvent) { // 应用启动，需要在代码动态添加监听器才可捕获
