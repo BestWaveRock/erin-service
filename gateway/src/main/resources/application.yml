@@ -1,0 +1,96 @@
+spring:
+  profiles:
+    active: dev
+  http:
+    multipart:
+      maxFileSize: 20MB
+      maxRequestSize: 20MB
+
+ribbon:
+  ReadTimeout: 1200000
+  ConnectTimeout: 120000
+  # 每个节点的最大重试次数
+  MaxAutoRetries: 1
+  # 更换节点重试的最大次数
+  MaxAutoRetriesNextServer: 3
+  eureka:
+    enabled: false
+
+##timeout config
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 120000
+
+zuul:
+  debug:
+    request: true
+  max:
+    host:
+      connections: 500
+  host:
+    socket-timeout-millis: 120000
+    connect-timeout-millis: 120000
+#  prefix: /innerApi
+  retryable: true
+  routes:
+    baseService:
+      serviceId: baseSrvs
+    userService:
+      serviceId: userSrvs
+---
+server:
+  port: 8000
+
+spring:
+  profiles: local
+baseSrvs:
+  ribbon:
+    listOfServers: http://127.0.0.1:8999
+
+customSrvs:
+  ribbon:
+    listOfServers: http://127.0.0.1:8804
+
+---
+server:
+  port: 8000
+
+spring:
+  profiles: localnetwork
+baseSrvs:
+  ribbon:
+    listOfServers: http://127.0.0.1:8899
+
+customSrvs:
+  ribbon:
+    listOfServers: http://127.0.0.1:8804
+
+---
+server:
+  port: 8809
+spring:
+  profiles: uat
+baseSrvs:
+  ribbon:
+    listOfServers: 192.168.0.32:8801
+customSrvs:
+  ribbon:
+    listOfServers: 192.168.0.32:8804
+
+---
+server:
+  port: 8000
+spring:
+  profiles: docker
+baseSrvs:
+  ribbon:
+    listOfServers: ${BASE}
+userSrvs:
+  ribbon:
+    listOfServers: ${CUSTOMER}

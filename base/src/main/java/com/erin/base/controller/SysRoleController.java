@@ -1,5 +1,6 @@
 package com.erin.base.controller;
 
+import core.BaseController;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +29,7 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/sysRole")
 @Api(value = "角色表接口", description = "角色表接口")
-public class SysRoleController {
+public class SysRoleController extends BaseController {
 
 	@Autowired
 	SysRoleService sysroleService;

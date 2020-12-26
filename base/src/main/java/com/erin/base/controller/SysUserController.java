@@ -1,11 +1,12 @@
 package com.erin.base.controller;
 
 import core.BaseController;
-import exception.BusinessException;
+import entiry.Result;
 import com.erin.base.dto.request.SysUserRequestDTO;
 import com.erin.base.dto.response.SysUserResponseDTO;
-import entiry.ResponseEntity;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.http.MediaType;
@@ -40,9 +41,10 @@ public class SysUserController extends BaseController {
         return ResultUtils.wrapSuccess(sysuserService.getById(id));
 	}
 
+	@SneakyThrows
 	@PostMapping(value = "/login")
 	@ApiOperation(value = "登录接口", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<SysUserResponseDTO> login(@RequestBody SysUserRequestDTO sysUserRequestDTO, HttpServletRequest httpServletRequest) throws BusinessException {
+	public ResponseEntity<Result<SysUserResponseDTO>> login(@RequestBody SysUserRequestDTO sysUserRequestDTO, HttpServletRequest httpServletRequest) {
 		SysUserResponseDTO sysUserResponseDTO = sysuserService.login(sysUserRequestDTO);
 		return ResultUtils.wrapSuccess(sysUserResponseDTO);
 	}

@@ -1,5 +1,6 @@
 package com.erin.base.controller;
 
+import core.BaseController;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +27,7 @@ import utils.ResultUtils;
 @RestController
 @RequestMapping("/sysMenu")
 @Api(value = "权限表接口", description = "权限表接口")
-public class SysMenuController {
+public class SysMenuController extends BaseController {
 
 	@Autowired
 	SysMenuService sysmenuService;

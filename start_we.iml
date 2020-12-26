@@ -4,8 +4,10 @@
     <facet type="Spring" name="Spring">
       <configuration>
         <fileset id="fileset" name="Spring Application Context" removed="false">
+          <file>file://$MODULE_DIR$/src/main/java/com/erin/gateway/GatewayApplication.java</file>
           <file>file://$MODULE_DIR$/src/main/java/com/erin/flyway/FlywayApplication.java</file>
-          <file>file://$MODULE_DIR$/src/main/java/com/erin/servie/ServieApplication.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/com/erin/base/BaseApplication.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/com/erin/customer/CustomerApplication.java</file>
         </fileset>
       </configuration>
     </facet>

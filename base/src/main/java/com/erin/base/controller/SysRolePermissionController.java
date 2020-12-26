@@ -1,5 +1,6 @@
 package com.erin.base.controller;
 
+import core.BaseController;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/sysRolePermission")
 @Api(value = "角色权限关联表接口", description = "角色权限关联表接口")
-public class SysRolePermissionController {
+public class SysRolePermissionController extends BaseController {
 
 	@Autowired
 	SysRolePermissionService sysrolepermissionService;
