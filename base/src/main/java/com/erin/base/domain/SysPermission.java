@@ -19,7 +19,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author ljx
- * @since 2020-12-25
+ * @since 2020-12-27
  */
 @ApiModel("权限表")
 @Data
@@ -39,12 +39,12 @@ public class SysPermission extends Model<SysPermission> {
      * 权限名字
      */
     @ApiModelProperty(value = "权限名字")
-    private String roleCode;
+    private String permissionCode;
     /**
      * 权限名字
      */
     @ApiModelProperty(value = "权限名字")
-    private String roleName;
+    private String permissionName;
     /**
      * 创建者
      */
@@ -69,9 +69,9 @@ public class SysPermission extends Model<SysPermission> {
 
     public static final String ID = "id";
 
-    public static final String ROLE_CODE = "role_code";
+    public static final String PERMISSION_CODE = "permission_code";
 
-    public static final String ROLE_NAME = "role_name";
+    public static final String PERMISSION_NAME = "permission_name";
 
     public static final String CREATE_OPERATOR = "create_operator";
 

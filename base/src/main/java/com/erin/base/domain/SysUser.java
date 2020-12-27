@@ -19,7 +19,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author ljx
- * @since 2020-12-25
+ * @since 2020-12-27
  */
 @ApiModel("用户表")
 @Data
@@ -56,10 +56,20 @@ public class SysUser extends Model<SysUser> {
     @ApiModelProperty(value = "手机号")
     private String phone;
     /**
+     * 邮箱
+     */
+    @ApiModelProperty(value = "邮箱")
+    private String email;
+    /**
      * 头像
      */
     @ApiModelProperty(value = "头像")
     private String headImg;
+    /**
+     * 是否启用(0启用，1不启用)
+     */
+    @ApiModelProperty(value = "是否启用(0启用，1不启用)")
+    private Integer activeFlag;
     /**
      * 创建者
      */
@@ -92,7 +102,11 @@ public class SysUser extends Model<SysUser> {
 
     public static final String PHONE = "phone";
 
+    public static final String EMAIL = "email";
+
     public static final String HEAD_IMG = "head_img";
+
+    public static final String ACTIVE_FLAG = "active_flag";
 
     public static final String CREATE_OPERATOR = "create_operator";
 

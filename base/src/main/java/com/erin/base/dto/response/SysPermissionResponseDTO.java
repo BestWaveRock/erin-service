@@ -16,7 +16,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author ljx
- * @since 2020-12-25
+ * @since 2020-12-27
  */
 @ApiModel("权限表响应类")
 @Data
@@ -35,12 +35,12 @@ public class SysPermissionResponseDTO implements Serializable {
      * 权限名字
      */
     @ApiModelProperty(value = "权限名字")
-    private String roleCode;
+    private String permissionCode;
     /**
      * 权限名字
      */
     @ApiModelProperty(value = "权限名字")
-    private String roleName;
+    private String permissionName;
     /**
      * 创建者
      */

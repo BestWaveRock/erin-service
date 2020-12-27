@@ -16,7 +16,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author ljx
- * @since 2020-12-25
+ * @since 2020-12-27
  */
 @ApiModel("用户表请求类")
 @Data
@@ -52,10 +52,20 @@ public class SysUserRequestDTO implements Serializable {
     @ApiModelProperty(value = "手机号")
     private String phone;
     /**
+     * 邮箱
+     */
+    @ApiModelProperty(value = "邮箱")
+    private String email;
+    /**
      * 头像
      */
     @ApiModelProperty(value = "头像")
     private String headImg;
+    /**
+     * 是否启用(0启用，1不启用)
+     */
+    @ApiModelProperty(value = "是否启用(0启用，1不启用)")
+    private Integer activeFlag;
     /**
      * 创建者
      */

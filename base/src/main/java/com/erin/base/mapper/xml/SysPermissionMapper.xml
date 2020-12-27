@@ -5,8 +5,8 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.erin.base.domain.SysPermission">
         <id column="id" property="id" />
-        <result column="role_code" property="roleCode" />
-        <result column="role_name" property="roleName" />
+        <result column="permission_code" property="permissionCode" />
+        <result column="permission_name" property="permissionName" />
         <result column="create_operator" property="createOperator" />
         <result column="create_datetime" property="createDatetime" />
         <result column="update_operator" property="updateOperator" />
@@ -15,7 +15,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, role_code, role_name, create_operator, create_datetime, update_operator, update_datetime
+        id, permission_code, permission_name, create_operator, create_datetime, update_operator, update_datetime
     </sql>
 
 </mapper>

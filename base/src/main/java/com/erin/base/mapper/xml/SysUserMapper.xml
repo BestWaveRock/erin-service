@@ -9,7 +9,9 @@
         <result column="psword" property="psword" />
         <result column="name" property="name" />
         <result column="phone" property="phone" />
+        <result column="email" property="email" />
         <result column="head_img" property="headImg" />
+        <result column="active_flag" property="activeFlag" />
         <result column="create_operator" property="createOperator" />
         <result column="create_datetime" property="createDatetime" />
         <result column="update_operator" property="updateOperator" />
@@ -18,7 +20,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, account, psword, name, phone, head_img, create_operator, create_datetime, update_operator, update_datetime
+        id, account, psword, name, phone, email, head_img, active_flag, create_operator, create_datetime, update_operator, update_datetime
     </sql>
 
 </mapper>
