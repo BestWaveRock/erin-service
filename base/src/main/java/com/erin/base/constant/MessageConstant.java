@@ -9,4 +9,7 @@ public class MessageConstant {
     public static final String SERVICE_USER_REGISTER_VERIFICATION = "service.user.register.verification";
     public static final String SERVICE_USER_REGISTER_ERROR = "service.user.register.error";
 
+
+    public static final String SERVICE_USER_SAVE_FAIL = "service.user.save.fail";
+
 }

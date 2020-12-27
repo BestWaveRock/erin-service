@@ -3,6 +3,7 @@ package com.erin.base.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.erin.base.domain.SysRole;
 import com.erin.base.domain.SysUser;
+import com.erin.base.dto.request.SysRoleRequestDTO;
 import com.erin.base.dto.request.api.SysRolePageQuery;
 import com.erin.base.dto.request.api.SysUserPageQuery;
 import core.BaseController;
@@ -53,4 +54,10 @@ public class SysRoleController extends BaseController {
 		return ResultUtils.wrapSuccess(sysroleService.getListPage(sysRolePageQuery));
 	}
 
+	@SneakyThrows
+	@PostMapping(value = "/create")
+	@ApiOperation(value = "创建一个角色", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Result<Long>> create(@RequestBody SysRoleRequestDTO sysRoleRequestDTO, HttpServletRequest httpServletRequest) {
+		return ResultUtils.wrapSuccess(sysroleService.create(sysRoleRequestDTO));
+	}
 }

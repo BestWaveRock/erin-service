@@ -100,8 +100,8 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
 
     public void checkData(SysUserRequestDTO sysUserRequestDTO, Integer scene) throws BusinessException {
         if (Objects.isNull(sysUserRequestDTO)
-                || StringUtils.isNotBlank(sysUserRequestDTO.getAccount())
-                || StringUtils.isNotBlank(sysUserRequestDTO.getPsword())) {
+                || StringUtils.isBlank(sysUserRequestDTO.getAccount())
+                || StringUtils.isBlank(sysUserRequestDTO.getPsword())) {
             switch (scene) {
                 case LOGIN:
                     throw new BusinessException(i18nService.getMessage(MessageConstant.SERVICE_USER_LOGIN_VERIFICATION), HttpConstant.ErrorCode.ERROR);
