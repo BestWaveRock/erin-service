@@ -1,21 +1,27 @@
 package com.erin.base.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.erin.base.domain.SysPermission;
+import com.erin.base.domain.SysRole;
+import com.erin.base.dto.request.api.SysPermissionPageQuery;
+import com.erin.base.dto.request.api.SysRolePageQuery;
 import core.BaseController;
+import entiry.Result;
+import lombok.SneakyThrows;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
 import com.erin.base.service.SysPermissionService;
-import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import utils.ResultUtils;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -38,5 +44,12 @@ public class SysPermissionController extends BaseController {
 	@ApiOperation(value = "权限表详情", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Object get(@PathVariable("id") Long id) {
         return ResultUtils.wrapSuccess(syspermissionService.getById(id));
+	}
+
+	@SneakyThrows
+	@PostMapping(value = "/page")
+	@ApiOperation(value = "列表", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Result<IPage<SysPermission>>> page(@RequestBody SysPermissionPageQuery sysPermissionPageQuery, HttpServletRequest httpServletRequest) {
+		return ResultUtils.wrapSuccess(syspermissionService.getListPage(sysPermissionPageQuery));
 	}
 }

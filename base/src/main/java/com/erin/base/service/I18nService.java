@@ -1,6 +1,6 @@
 package com.erin.base.service;
 
-import com.erin.base.utils.LocaleUtils;
+import utils.LocaleUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;

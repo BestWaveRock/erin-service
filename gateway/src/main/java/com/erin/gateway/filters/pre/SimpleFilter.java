@@ -31,7 +31,6 @@ public class SimpleFilter extends ZuulFilter {
     HttpServletRequest request = ctx.getRequest();
     String contextURI = request.getRequestURI();
     log.info(String.format("contextURI  %s ",contextURI));
-//    ctx.set
     log.info(String.format("%s request to %s", request.getMethod(), request.getRequestURL().toString()));
 
     return null;

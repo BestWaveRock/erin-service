@@ -1,5 +1,9 @@
 package com.erin.base.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.erin.base.constant.MessageConstant;
+import com.erin.base.dto.request.api.SysUserPageQuery;
 import constant.HttpConstant;
 import exception.BusinessException;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -8,12 +12,15 @@ import com.erin.base.dto.request.SysUserRequestDTO;
 import com.erin.base.dto.response.SysUserResponseDTO;
 import com.erin.base.mapper.SysUserMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import utils.StringUtils;
 
-import java.io.IOException;
 import java.util.Objects;
+
+import static com.erin.base.constant.UserConstant.LOGIN;
+import static com.erin.base.constant.UserConstant.REGISTER;
 
 /**
  * <p>
@@ -23,26 +30,27 @@ import java.util.Objects;
  * @author ljx
  * @since 2020-12-25
  */
+@Slf4j
 @Service
 public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
 
-    @Autowired
-    private SysUserMapper sysUserMapper;
+    private final SysUserMapper sysUserMapper;
 
     private final I18nService i18nService;
 
-    public SysUserService(I18nService i18nService) {
+    public SysUserService(I18nService i18nService, SysUserMapper sysUserMapper) {
         this.i18nService = i18nService;
+        this.sysUserMapper = sysUserMapper;
     }
 
     /**
-     * 简单的登录验证接口
+     * 登录验证接口
      * @param sysUserRequestDTO
      * @return
      * @throws BusinessException
      */
     public SysUserResponseDTO login(SysUserRequestDTO sysUserRequestDTO) throws BusinessException {
-        checkData(sysUserRequestDTO);
+        checkData(sysUserRequestDTO, LOGIN);
         QueryWrapper<SysUser> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq(SysUser.ACCOUNT, sysUserRequestDTO.getAccount());
         queryWrapper.eq(SysUser.PSWORD, sysUserRequestDTO.getPsword());
@@ -52,20 +60,58 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
             BeanUtils.copyProperties(sysUser, sysUserResponseDTO);
             return sysUserResponseDTO;
         } else {
-            throw new BusinessException(i18nService.getMessage("service.user.login.fail"), HttpConstant.ErrorCode.NOT_LOGIN);
+            throw new BusinessException(i18nService.getMessage(MessageConstant.SERVICE_USER_LOGIN_FAIL), HttpConstant.ErrorCode.NOT_LOGIN);
         }
     }
 
-    public Boolean register(SysUserRequestDTO sysUserRequestDTO) throws BusinessException {
-        checkData(sysUserRequestDTO);
-
-        return false;
-    }
-
-    public void checkData(SysUserRequestDTO sysUserRequestDTO) throws BusinessException {
-        if (Objects.isNull(sysUserRequestDTO)) {
-            throw new BusinessException(i18nService.getMessage("service.user.login.verification"), HttpConstant.ErrorCode.ERROR);
+    /**
+     * register
+     * @param sysUserRequestDTO
+     * @return
+     * @throws BusinessException
+     */
+    public Long register(SysUserRequestDTO sysUserRequestDTO) throws BusinessException {
+        checkData(sysUserRequestDTO, REGISTER);
+        SysUser user = new SysUser();
+        BeanUtils.copyProperties(sysUserRequestDTO, user);
+        boolean save = this.save(user);
+        if (!save) {
+            log.error("注册异常！{}", user.toString());
+            throw new BusinessException(MessageConstant.SERVICE_USER_REGISTER_ERROR);
+        } else {
+            return user.getId();
         }
     }
+
+    public IPage<SysUser> getListPage(SysUserPageQuery sysUserPageQuery) {
+        Page<SysUser> page = new Page(sysUserPageQuery.getCurrent(), sysUserPageQuery.getSize());
+
+        QueryWrapper<SysUser> sysUserQueryWrapper = new QueryWrapper<>();
+
+        sysUserQueryWrapper.eq(SysUser.NAME, sysUserPageQuery.getName());
+        sysUserQueryWrapper.eq(SysUser.PHONE, sysUserPageQuery.getPhone());
+
+        IPage<SysUser> sysUserIPage = sysUserMapper.selectPage(page, sysUserQueryWrapper);
+
+        return sysUserIPage;
+    }
+
+    /* 以下开始方法为抽象或者验证对象的方法 */
+
+    public void checkData(SysUserRequestDTO sysUserRequestDTO, Integer scene) throws BusinessException {
+        if (Objects.isNull(sysUserRequestDTO)
+                || StringUtils.isNotBlank(sysUserRequestDTO.getAccount())
+                || StringUtils.isNotBlank(sysUserRequestDTO.getPsword())) {
+            switch (scene) {
+                case LOGIN:
+                    throw new BusinessException(i18nService.getMessage(MessageConstant.SERVICE_USER_LOGIN_VERIFICATION), HttpConstant.ErrorCode.ERROR);
+                case REGISTER:
+                    throw new BusinessException(i18nService.getMessage(MessageConstant.SERVICE_USER_REGISTER_VERIFICATION), HttpConstant.ErrorCode.ERROR);
+                default:
+            }
+        }
+    }
+
+    /* END */
 
 }

@@ -1,5 +1,8 @@
 package com.erin.base.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.erin.base.domain.SysUser;
+import com.erin.base.dto.request.api.SysUserPageQuery;
 import core.BaseController;
 import entiry.Result;
 import com.erin.base.dto.request.SysUserRequestDTO;
@@ -16,6 +19,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import utils.ResultUtils;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 
@@ -32,7 +36,7 @@ import javax.servlet.http.HttpServletRequest;
 @Api(value = "用户表接口", description = "用户表接口")
 public class SysUserController extends BaseController {
 
-	@Autowired
+	@Resource
 	SysUserService sysuserService;
 
 	@GetMapping(value = "/{id}")
@@ -43,9 +47,23 @@ public class SysUserController extends BaseController {
 
 	@SneakyThrows
 	@PostMapping(value = "/login")
-	@ApiOperation(value = "登录接口", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(value = "登录", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Result<SysUserResponseDTO>> login(@RequestBody SysUserRequestDTO sysUserRequestDTO, HttpServletRequest httpServletRequest) {
 		SysUserResponseDTO sysUserResponseDTO = sysuserService.login(sysUserRequestDTO);
 		return ResultUtils.wrapSuccess(sysUserResponseDTO);
+	}
+
+	@SneakyThrows
+	@PostMapping(value = "/register")
+	@ApiOperation(value = "注册", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Result<Boolean>> register(@RequestBody SysUserRequestDTO sysUserRequestDTO, HttpServletRequest httpServletRequest) {
+		return ResultUtils.wrapSuccess(sysuserService.register(sysUserRequestDTO));
+	}
+
+	@SneakyThrows
+	@PostMapping(value = "/page")
+	@ApiOperation(value = "列表", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Result<IPage<SysUser>>> page(@RequestBody SysUserPageQuery sysUserPageQuery, HttpServletRequest httpServletRequest) {
+		return ResultUtils.wrapSuccess(sysuserService.getListPage(sysUserPageQuery));
 	}
 }
