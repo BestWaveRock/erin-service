@@ -45,7 +45,7 @@ zuul:
       serviceId: userSrvs
 ---
 server:
-  port: 8000
+  port: 7000
 
 spring:
   profiles: local
@@ -59,7 +59,7 @@ customSrvs:
 
 ---
 server:
-  port: 8000
+  port: 7000
 
 spring:
   profiles: localnetwork

@@ -79,6 +79,9 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
             log.error("注册异常！{}", user.toString());
             throw new BusinessException(MessageConstant.SERVICE_USER_REGISTER_ERROR);
         } else {
+
+            // TODO 发送邮箱验证链接，确认邮箱是否本人，不是本人的邮箱无法操作。
+
             return user.getId();
         }
     }
