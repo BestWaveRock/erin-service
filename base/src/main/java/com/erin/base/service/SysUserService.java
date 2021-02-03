@@ -1,10 +1,13 @@
 package com.erin.base.service;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.erin.base.constant.MessageConstant;
+import com.erin.base.constant.UserMessageConstant;
 import com.erin.base.dto.request.api.SysUserPageQuery;
 import constant.HttpConstant;
+import constant.MessageConstant;
 import exception.BusinessException;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.erin.base.domain.SysUser;
@@ -49,6 +52,7 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
      * @return
      * @throws BusinessException
      */
+    @SentinelResource(blockHandler = "blockHandlerForLogin")
     public SysUserResponseDTO login(SysUserRequestDTO sysUserRequestDTO) throws BusinessException {
         checkData(sysUserRequestDTO, LOGIN);
         QueryWrapper<SysUser> queryWrapper = new QueryWrapper<>();
@@ -60,7 +64,7 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
             BeanUtils.copyProperties(sysUser, sysUserResponseDTO);
             return sysUserResponseDTO;
         } else {
-            throw new BusinessException(i18nService.getMessage(MessageConstant.SERVICE_USER_LOGIN_FAIL), HttpConstant.ErrorCode.NOT_LOGIN);
+            throw new BusinessException(i18nService.getMessage(UserMessageConstant.SERVICE_USER_LOGIN_FAIL), HttpConstant.ErrorCode.NOT_LOGIN);
         }
     }
 
@@ -77,7 +81,7 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
         boolean save = this.save(user);
         if (!save) {
             log.error("注册异常！{}", user.toString());
-            throw new BusinessException(MessageConstant.SERVICE_USER_REGISTER_ERROR);
+            throw new BusinessException(UserMessageConstant.SERVICE_USER_REGISTER_ERROR);
         } else {
 
             // TODO 发送邮箱验证链接，确认邮箱是否本人，不是本人的邮箱无法操作。
@@ -107,14 +111,25 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
                 || StringUtils.isBlank(sysUserRequestDTO.getPsword())) {
             switch (scene) {
                 case LOGIN:
-                    throw new BusinessException(i18nService.getMessage(MessageConstant.SERVICE_USER_LOGIN_VERIFICATION), HttpConstant.ErrorCode.ERROR);
+                    throw new BusinessException(i18nService.getMessage(UserMessageConstant.SERVICE_USER_LOGIN_VERIFICATION), HttpConstant.ErrorCode.ERROR);
                 case REGISTER:
-                    throw new BusinessException(i18nService.getMessage(MessageConstant.SERVICE_USER_REGISTER_VERIFICATION), HttpConstant.ErrorCode.ERROR);
+                    throw new BusinessException(i18nService.getMessage(UserMessageConstant.SERVICE_USER_REGISTER_VERIFICATION), HttpConstant.ErrorCode.ERROR);
                 default:
             }
         }
     }
 
     /* END */
+
+    /**
+     * blockHandler 函数，原方法调用被限流/降级/系统保护的时候调用
+     * @param sysUserRequestDTO
+     * @param blockEx
+     * @return
+     */
+    public String blockHandlerForLogin(SysUserRequestDTO sysUserRequestDTO, BlockException blockEx) throws BusinessException {
+        log.warn("user login方法调用被限流/降级/系统保护, param: {}, exMessage: {}", sysUserRequestDTO, blockEx.getMessage());
+        throw new BusinessException(MessageConstant.RESP_ERR_CODE);
+    }
 
 }

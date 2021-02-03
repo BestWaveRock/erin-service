@@ -3,7 +3,7 @@ package com.erin.base.service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.erin.base.constant.MessageConstant;
+import com.erin.base.constant.UserMessageConstant;
 import com.erin.base.domain.SysPermission;
 import com.erin.base.domain.SysRole;
 import com.erin.base.dto.request.SysPermissionRequestDTO;
@@ -52,7 +52,7 @@ public class SysPermissionService extends ServiceImpl<SysPermissionMapper, SysPe
         boolean save = this.save(sysPermission);
         if (!save) {
             log.error("保存失敗");
-            throw new BusinessException(MessageConstant.SERVICE_USER_SAVE_FAIL);
+            throw new BusinessException(UserMessageConstant.SERVICE_USER_SAVE_FAIL);
         }
         return sysPermission.getId();
     }

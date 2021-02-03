@@ -1,6 +1,8 @@
 package com.erin.base.constant;
 
-public class MessageConstant {
+import constant.MessageConstant;
+
+public class UserMessageConstant extends MessageConstant {
 
     public static final String SERVICE_USER_LOGIN_VERIFICATION = "service.user.login.verification";
     public static final String SERVICE_USER_LOGIN_FAIL = "service.user.login.fail";
