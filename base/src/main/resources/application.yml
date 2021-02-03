@@ -10,6 +10,6 @@ spring:
     password: root12345
 logging:
   file:
-    path: "C:/coder/log/log_info"
+    path: "log"
   level:
     root: info

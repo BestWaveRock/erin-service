@@ -5,7 +5,7 @@ spring:
     active: localnetwork
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.0.102:3306/merry_christmas?serverTimezone=UTC
+    url: jdbc:mysql://192.168.31.150:3306/merry_christmas?serverTimezone=UTC
     username: root
     password: root12345
 logging:
